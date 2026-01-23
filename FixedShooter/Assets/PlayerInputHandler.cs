@@ -43,6 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
         moveAction = playerControls.FindActionMap(actionMapName).FindAction(move);
         sprintAction = playerControls.FindActionMap(actionMapName).FindAction(sprint);      
     
+        RegisterInputActions();
     }
 
     //This registers the inputs and connects them with the above variables, taking the correct input.
@@ -52,7 +53,7 @@ public class PlayerInputHandler : MonoBehaviour
         moveAction.canceled += context => MoveInput = Vector2.zero;
 
         sprintAction.performed += context => SprintValue = context.ReadValue<float>();
-        sprintAction.performed += context => SprintValue = 0f;
+        sprintAction.canceled += context => SprintValue = 0f;
     
     }
 
